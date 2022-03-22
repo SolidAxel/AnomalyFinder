@@ -1,7 +1,7 @@
 from distutils.command.config import config
 import json
+from posixpath import abspath
 from unittest import result
-import drain3
 import logging
 import os
 import subprocess
@@ -29,6 +29,7 @@ if not os.path.isfile(inLogFile):
     Exception('File not found in current directory.')
 
 config = TemplateMinerConfig()
+config.load(dirname(os.path.abspath(__file__)) + "/drainConfig.ini")
 config.profiling_enabled = True
 templateMiner = TemplateMiner(persistence, config=config)
 
