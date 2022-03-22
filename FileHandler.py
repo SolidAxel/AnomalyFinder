@@ -23,7 +23,7 @@ fileHandler.setLevel(logging.INFO)
 
 logger.addHandler(fileHandler)
 
-inLogFile = "03-08-22_152132__all.log"
+inLogFile = input("Please enter filename>> ")
 if not os.path.isfile(inLogFile):
     logger.info('Make sure file is in same directory as this program.')
     Exception('File not found in current directory.')
