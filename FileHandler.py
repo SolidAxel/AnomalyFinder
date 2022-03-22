@@ -13,7 +13,7 @@ from drain3 import TemplateMiner
 from drain3.template_miner_config import TemplateMinerConfig
 from drain3.file_persistence import FilePersistence
 
-persistence = FilePersistence("drain3State.bin")
+persistence = FilePersistence("states/drain3State.bin")
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,format='%(message)s')
