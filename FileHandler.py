@@ -18,6 +18,13 @@ inLogFile = sys.stdin
 if not os.path.isfile(inLogFile):
     logger.info('Make sure file is in same directory as this program.')
     Exception('File not found in current directory.')
+
 config = TemplateMinerConfig()
 config.profiling_enabled = True
 template_miner = TemplateMiner(config=config)
+
+lineCount = 0
+
+with open(inLogFile) as f:
+    lines = f.readlines()
+
