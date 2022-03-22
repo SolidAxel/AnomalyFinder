@@ -15,7 +15,12 @@ from drain3.template_miner_config import TemplateMinerConfig
 logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,format='%(message)s')
 
-inLogFile = sys.stdin
+fileHandler = logging.FileHandler('Output.log')
+fileHandler.setLevel(logging.INFO)
+
+logger.addHandler(fileHandler)
+
+inLogFile = "03-08-22_152132__all.log"
 if not os.path.isfile(inLogFile):
     logger.info('Make sure file is in same directory as this program.')
     Exception('File not found in current directory.')
@@ -47,11 +52,12 @@ for line in lines:
         resultJSON = json.dumps(result)
         logger.info(f"Input ({lineCount}): " + line)
         logger.info("Result: " + resultJSON)
+        
+
 
 timeTaken = time.time() - startTime
 rate = lineCount / timeTaken
 logger.info(f"--- Done processing file in {timeTaken:.2f} sec. Total of {lineCount} lines, rate {rate:.1f} lines/sec, " f"{len(template_miner.drain.clusters)} clusters")
-
 sortedClusters = sorted(template_miner.drain.clusters, key=lambda it: it.size, reverse=True)
 for cluster in sortedClusters:
     logger.info(cluster)
