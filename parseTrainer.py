@@ -83,6 +83,7 @@ for cluster in sortedClusters:
 print("Prefix Tree:")
 templateMiner.drain.print_tree()
 templateMiner.profiler.report(0)
+
 # TODO Move this to it's own seperate .py
 bat = None
 boot = None
