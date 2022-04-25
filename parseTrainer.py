@@ -11,6 +11,7 @@ from os.path import dirname
 from drain3 import TemplateMiner
 from drain3.template_miner_config import TemplateMinerConfig
 from drain3.file_persistence import FilePersistence
+from requests import get
 
 persistence = FilePersistence("states/drain3State.bin")
 
@@ -82,4 +83,19 @@ for cluster in sortedClusters:
 print("Prefix Tree:")
 templateMiner.drain.print_tree()
 templateMiner.profiler.report(0)
-print(str(params))
+# TODO Move this to it's own seperate .py
+bat = None
+boot = None
+for x in params:
+    for y in x:
+        if getattr(y, "mask_name") == "BAT_VOL":
+            bat = getattr(y, "value").split(" ")[1]
+        elif getattr(y, "mask_name") == "BOOT_TYPE":
+            # boot = getattr(y, "value").split()
+            boot = getattr(y, "value").split("=")[1]
+
+if boot == "WarmBoot":
+    assert int(bat) >= 1.5
+elif boot == "ColdBoot":
+    assert int(bat) < 1.5
+# print(str(params))
